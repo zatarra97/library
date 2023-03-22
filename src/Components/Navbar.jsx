@@ -7,8 +7,8 @@ function Navbar(){
 <nav className="bg-white px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
   <div className="container flex flex-wrap items-center justify-between mx-auto">
   <a href="/" className="flex items-center">
-      <img src="https://flowbite.com/docs/images/logo.svg" className="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
-      <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+      <img src="https://flowbite.com/docs/images/logo.svg" className="h-6 mr-3 sm:h-9" alt={process.env.REACT_APP_NAME} />
+      <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">{process.env.REACT_APP_NAME}</span>
   </a>
   <div className="flex md:order-2 space-x-2">
 
@@ -18,7 +18,30 @@ function Navbar(){
         <a href="/auth/registrati" className="cta primary">Registrati</a>
       </div>
       : 
-      <a href="/" className="cta primary hidden md:block">Ciao Utente</a>
+      <>
+        <img id="avatarButton" className="w-10 h-10 rounded-full cursor-pointer hidden md:block" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" src="https://picsum.photos/60/60" alt="User dropdown" />
+
+        <div id="userDropdown" className="z-50 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+            <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
+              <div>Bonnie Green</div>
+              <div className="font-medium truncate">name@flowbite.com</div>
+            </div>
+            <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
+              <li>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+              </li>
+              <li>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+              </li>
+              <li>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+              </li>
+            </ul>
+            <div className="py-1">
+              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Log out</a>
+            </div>
+        </div>
+      </>
     }
       
       <button data-collapse-toggle="navbar-sticky" type="button" className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
