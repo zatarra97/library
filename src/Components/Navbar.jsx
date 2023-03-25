@@ -18,9 +18,10 @@ function Navbar(){
         <a href="/auth/registrati" className="cta primary">Registrati</a>
       </div>
       : 
-      <>
-        <img id="avatarButton" className="w-10 h-10 rounded-full cursor-pointer hidden md:block" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" src="https://picsum.photos/60/60" alt="User dropdown" />
-
+      <><div className="flex cursor-pointer" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" >
+        <img id="avatarButton" className="w-10 h-10 rounded-full cursor-pointer hidden md:block" type="button" src="https://picsum.photos/60/60" alt="User dropdown" />
+          <p className="mt-2 pl-2">Emmanuele</p>
+        </div>
         <div id="userDropdown" className="z-50 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
             <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
               <div>Bonnie Green</div>
@@ -28,17 +29,17 @@ function Navbar(){
             </div>
             <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
               <li>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                <a href="/account" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Account</a>
               </li>
               <li>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                <a href="/ordini" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ordini</a>
               </li>
               <li>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                <a href="/indirizzi" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Indirizzi consegna</a>
               </li>
             </ul>
             <div className="py-1">
-              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Log out</a>
+              <a href="/auth/logout" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Esci</a>
             </div>
         </div>
       </>

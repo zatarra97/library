@@ -1,6 +1,6 @@
 function Card(props){
     return <>
-        <a href="#">
+        <a href="/dettaglio">
         <div className="max-w-sm bg-white border border-gray-200 rounded-md shadow dark:bg-gray-800 dark:border-gray-700">
             <img className="rounded-t-lg" src={props.img} alt={props.nome} />
             <div className="p-5 pt-2">
