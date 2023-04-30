@@ -1,7 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import Axios from 'axios';
 import Input from "../../Components/Forms/Input";
 
+
 function Login(){
+
+    const [email, setEmail] = useState("");
+
+    function handleEmailChange(event) {
+      setEmail(event.target.value);
+    }
+
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const formData = "";
+      
+        try {
+          // Effettuiamo una chiamata POST all'endpoint 'http://localhost:3001/api/inserisci' con il FormData come body
+          await Axios.post('http://localhost:3001/api/inserisci', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          });
+        } catch (error) {
+          console.error(error);
+          alert('Si è verificato un errore durante l\'invio dei dati');
+        }
+      };
+
     return <>
             <section className="bg-gray-100 dark:bg-gray-900 py-20">
                 <div className="flex flex-col items-center justify-center px-4 pt-8 mx-auto md:pt-20 ">
@@ -16,7 +43,14 @@ function Login(){
                             </h1>
                             <form className="space-y-4 md:space-y-6" action="#">
 
-                                <Input id="email" type="email" label="Email" placeholder="name@company.com"/>
+                            <Input
+                                id="email"
+                                type="email"
+                                label="Email"
+                                placeholder="name@company.com"
+                                onChange={handleEmailChange}
+                            />
+                                  <p>Email inserita: {email}</p>
                                 <Input id="password" type="password" label="Password" placeholder="••••••••"/>
 
                                 <div className="flex items-center justify-between">
@@ -25,7 +59,7 @@ function Login(){
                                     </div>
                                 </div>
 
-                                <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Accedi</button>
+                                <button type="submit" onClick={handleSubmit} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Accedi</button>
 
                                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                     Non hai un account? <a href="/auth/registrati" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Registrati</a>

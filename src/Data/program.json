@@ -1,0 +1,88 @@
+{
+    "categorie": [
+      { "id" : 1,
+        "nome": "Primi Piatti",
+        "piatti": [
+            {
+                "id" : 1,
+                "nome": "Spaghetti all'assassina",
+                "descrizione": "spaghetti, pomodoro, stracciatella",
+                "costo": "10.00",
+                "visibilità" : false
+              },
+              {
+                "id" : 2,
+                "nome": "Pasta al forno",
+                "descrizione": "pomodoro, mozzarella",
+                "costo": "7.00",
+                "visibilità" : true
+              },
+              {
+                "id" : 3,
+                "nome": "Cardoncelli e salsiccia",
+                "descrizione": "pomodoro, funghi cardoncelli, salsiccia fresca, mozzarella",
+                "costo": "8.00",
+                "visibilità" : true
+              }
+        ]
+      },
+      { "id" : 2,
+        "nome": "Pizze",
+        "piatti": [
+            {
+                "id" : 1,
+                "nome": "Margherita",
+                "descrizione": "spaghetti, pomodoro, stracciatella",
+                "costo": "4.00",
+                "visibilità" : false
+              },
+              {
+                "id" : 2,
+                "nome": "Quattro stagioni",
+                "descrizione": "pomodoro, mozzarella",
+                "costo": "5.00",
+                "visibilità" : true
+              },
+              {
+                "id" : 3,
+                "nome": "Prosciutto e funghi",
+                "descrizione": "pomodoro, funghi cardoncelli, salsiccia fresca, mozzarella",
+                "costo": "5.50",
+                "visibilità" : true
+              },
+              {
+                "id" : 4,
+                "nome": "Mortadela e pistacchio",
+                "descrizione": "pomodoro, funghi cardoncelli, salsiccia fresca, mozzarella",
+                "costo": "7.00",
+                "visibilità" : true
+              }
+        ]
+      },{ "id" : 1,
+      "nome": "Bibite",
+      "piatti": [
+          {
+              "id" : 1,
+              "nome": "Coca cola",
+              "descrizione": "Lattina 20cl",
+              "costo": "1.50",
+              "visibilità" : true
+            },
+            {
+              "id" : 2,
+              "nome": "Fanta",
+              "descrizione": "Lattina 20cl",
+              "costo": "1.50",
+              "visibilità" : true
+            },
+            {
+              "id" : 3,
+              "nome": "Birra Peroni",
+              "descrizione": "33cl",
+              "costo": "1.00",
+              "visibilità" : true
+            }
+      ]
+    }
+    ]
+  }

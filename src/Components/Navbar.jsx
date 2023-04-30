@@ -1,6 +1,6 @@
 function Navbar(){
 
-  const isLogged = false;
+  const isLogged = true;
 
     return <>
         
@@ -12,6 +12,7 @@ function Navbar(){
   </a>
   <div className="flex md:order-2 space-x-2">
 
+    <div className="hidden lg:flex">
     {isLogged ? 
       <div className="space-x-2">
         <a href="/auth/login" className="cta primary">Accedi</a>
@@ -44,6 +45,7 @@ function Navbar(){
         </div>
       </>
     }
+    </div>
       
       <button data-collapse-toggle="navbar-sticky" type="button" className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
         <span className="sr-only">Open main menu</span>
