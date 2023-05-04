@@ -1,33 +1,40 @@
-import React, { useState } from "react";
 import Axios from 'axios';
-import Input from "../../Components/Forms/Input";
-
+import Cookies from 'js-cookie';
+import React, { useState } from "react";
 
 function Login(){
 
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
-    function handleEmailChange(event) {
-      setEmail(event.target.value);
+    function handleUsernameChange(event) {
+        setUsername(event.target.value);
     }
 
+    function handlePasswordChange(event) {
+        setPassword(event.target.value);
+    }
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
-        const formData = "";
-      
-        try {
-          // Effettuiamo una chiamata POST all'endpoint 'http://localhost:3001/api/inserisci' con il FormData come body
-          await Axios.post('http://localhost:3001/api/inserisci', formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          });
-        } catch (error) {
-          console.error(error);
-          alert('Si è verificato un errore durante l\'invio dei dati');
+      event.preventDefault();
+
+      try {
+        // Effettuiamo una chiamata POST all'endpoint 'http://localhost:3001/api/login' con il FormData come body
+        const response = await Axios.post('http://localhost:3001/login', {username, password});
+        console.log(response.data);
+
+        if (response.data['0'].email != undefined){
+            Cookies.set('userEmail', response.data['0'].email);
+            Cookies.set('userName', response.data['0'].name);
+            Cookies.set('userSurname', response.data['0'].surname);
+            window.location.replace("/");
         }
-      };
+        
+      } catch (error) {
+        console.error(error);
+        alert('Si è verificato un errore durante l\'invio dei dati');
+      }
+    };
 
     return <>
             <section className="bg-gray-100 dark:bg-gray-900 py-20">
@@ -41,17 +48,13 @@ function Login(){
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 Accedi al tuo account
                             </h1>
-                            <form className="space-y-4 md:space-y-6" action="#">
+                            <form className="space-y-4 md:space-y-4" action="#">
 
-                            <Input
-                                id="email"
-                                type="email"
-                                label="Email"
-                                placeholder="name@company.com"
-                                onChange={handleEmailChange}
-                            />
-                                  <p>Email inserita: {email}</p>
-                                <Input id="password" type="password" label="Password" placeholder="••••••••"/>
+                                <label htmlFor="email" className="block mb-2 text-left text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                <input value={username} onChange={handleUsernameChange} type="email" name="email" id="email" placeholder="name@company.com" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"  required/> 
+
+                                <label htmlFor="password" className="block mb-2 text-left text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                <input value={password} onChange={handlePasswordChange} type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"  required/> 
 
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-start">

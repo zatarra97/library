@@ -1,6 +1,13 @@
+import Cookies from 'js-cookie';
 function Navbar(){
+  let notLogged = true;
+  const userEmailExists = Cookies.get('userEmail') !== undefined;
 
-  const isLogged = true;
+  if (userEmailExists) {
+    // il cookie `userEmail` esiste
+    notLogged = false;
+  }
+
 
     return <>
         
@@ -13,7 +20,7 @@ function Navbar(){
   <div className="flex md:order-2 space-x-2">
 
     <div className="hidden lg:flex">
-    {isLogged ? 
+    {notLogged ? 
       <div className="space-x-2">
         <a href="/auth/login" className="cta primary">Accedi</a>
         <a href="/auth/registrati" className="cta primary">Registrati</a>
@@ -21,12 +28,12 @@ function Navbar(){
       : 
       <><div className="flex cursor-pointer" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" >
         <img id="avatarButton" className="w-10 h-10 rounded-full cursor-pointer hidden md:block" type="button" src="https://picsum.photos/60/60" alt="User dropdown" />
-          <p className="mt-2 pl-2">Emmanuele</p>
+          <p className="mt-2 pl-2">{ Cookies.get('userName') }</p>
         </div>
         <div id="userDropdown" className="z-50 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
             <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
-              <div>Bonnie Green</div>
-              <div className="font-medium truncate">name@flowbite.com</div>
+              <div>{ Cookies.get('userName') } { Cookies.get('userSurname') }</div>
+              <div className="font-medium truncate">{ Cookies.get('userEmail') }</div>
             </div>
             <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
               <li>
@@ -66,6 +73,11 @@ function Navbar(){
       <li>
         <a href="www.google.it" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
       </li>
+      {!notLogged && (
+        <li>
+          <a href="/auth/logout" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Esci</a>
+        </li>
+      )}
     </ul>
   </div>
   </div>

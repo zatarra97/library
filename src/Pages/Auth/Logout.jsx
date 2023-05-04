@@ -1,14 +1,18 @@
 import { useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 function Logout(){
 
     //Cancelazione eventuali sessioni attive
+    function deleteSession(){
+        Cookies.remove('userEmail'); 
+        Cookies.remove('userName');
+        Cookies.remove('userSurname');
+    }
 
     useEffect(() => {
-        function redirect() {
-            window.location.assign(`/`);
-        }
-        redirect();
+        deleteSession();
+        window.location.assign(`/`);
     }, );
 
     return null;
