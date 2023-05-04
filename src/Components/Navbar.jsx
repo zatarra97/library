@@ -73,11 +73,20 @@ function Navbar(){
       <li>
         <a href="www.google.it" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
       </li>
-      {!notLogged && (
+      {notLogged ?
+      <div class="flex mt-5">
         <li>
-          <a href="/auth/logout" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Esci</a>
+          <a href="/auth/login" className="cta primary">Accedi</a>
         </li>
-      )}
+        <li>
+          <a href="/auth/registrati" className="cta primary">Registrati</a>
+        </li>
+      </div>
+      :
+      <li>
+        <a href="/auth/logout" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Esci</a>
+      </li>
+      }
     </ul>
   </div>
   </div>
