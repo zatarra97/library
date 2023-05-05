@@ -16,6 +16,7 @@ import ForgetPassword from "./Pages/Auth/ForgetPassword";
 import NotFound from "./Pages/NotFound"
 
 import AdminHome from "./Pages/Admin/Homepage"
+import Prenota from "./Pages/Prenota"
 
 function App() { 
   return <>
@@ -36,6 +37,7 @@ function App() {
 
     {/* Altre pagine */}
     <Route path="/scheda" element={<Scheda />} />
+    <Route path="/prenota" element={<Prenota />} />
 
     {/* Pannello Admin */}
     <Route path="/admin" element={<AdminHome />} />
