@@ -1,0 +1,25 @@
+{
+    "apertura": "09:00",
+    "chiusura": "18:00",
+    "pausa_pranzo": {
+        "inizio": "13:00",
+        "fine": "14:00"
+    },
+    "giorni_chiusura": ["sunday", "monday"],
+    "disponibilita": {
+        "monday": [],
+        "tuesday": [],
+        "wednesday": [],
+        "thursday": [],
+        "friday": [],
+        "saturday": [],
+        "sunday": []
+    }
+}
+
+
+
+
+
+
+
