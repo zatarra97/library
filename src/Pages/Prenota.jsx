@@ -35,7 +35,7 @@ function Prenota() {
         setSelectedTime(time);
       }
 
-    //Funziona che gestisce la data seleziona nel date-picker
+    //  Funzione che gestisce la data seleziona nel date-picker
     function handleDateChange(date) {
         setSelectedDate(date);
 
@@ -50,7 +50,7 @@ function Prenota() {
 
     // Funzione per verificare se un orario è durante la pausa pranzo
     function isPausaPranzo(ora) {
-        return moment(ora, "HH:mm").isBetween(moment(pausa_pranzo.inizio, "HH:mm"), moment(pausa_pranzo.fine, "HH:mm"), null, "[]");
+        return moment(ora, "HH:mm").isBetween(moment(pausa_pranzo.inizio, "HH:mm"), moment(pausa_pranzo.fine, "HH:mm"), null, '[)');
     }
 
     // Funzione per ottenere l'elenco dei giorni da visualizzare nella tabella
@@ -60,6 +60,48 @@ function Prenota() {
         const selectedDayIndex = daysOfWeek.indexOf(selectedDay.toLowerCase());
 
         return daysOfWeek.slice(selectedDayIndex, selectedDayIndex + 3);
+    }
+
+    // Funzione che controlla gli orari disponibili sulle prenotazioni già ricevute 
+    function isTimeBooked(date, time) {
+        const bookingExists = prenotazioni.prenotazioni.some((prenotazione) => {
+            if (prenotazione.data === date) {
+                const bookingStartTime = moment(prenotazione.ora, "HH:mm");
+                const bookingEndTime = moment(prenotazione.ora, "HH:mm").add(prenotazione.durata, "minutes");
+                const checkTime = moment(time, "HH:mm");
+                return checkTime.isBetween(bookingStartTime, bookingEndTime, null, '[)');
+            }
+            return false;
+        });
+        return bookingExists;
+    }
+
+    //Funzione che controlla se la durata del servizio selezionato può essere soddisfatta dagli orari disponibili
+    function isSlotDisponibile(ora, giorno) {
+        const oraMoment = moment(ora, "HH:mm");
+        const durataServizio = parseInt(selectedServiceDuration);
+    
+        for (let i = 0; i < durataServizio / 30; i++) {
+            const oraControllo = oraMoment.clone().add(i * 30, "minutes").format("HH:mm");
+            
+            if (isOrarioPrenotato(oraControllo, giorno) || isPausaPranzo(oraControllo)) {
+                return false;
+            }
+        }
+    
+        return true;
+    }
+
+    function isOrarioPrenotato(ora, giorno) {
+        const formattedDate = moment(selectedDate).add(getDaysToShow().indexOf(giorno), "days").format("DD/MM/YYYY");
+        const selectedFullDate = `${formattedDate} ${ora}`;
+    
+        return prenotazioni.prenotazioni.some(prenotazione => {
+            const prenotazioneFullDate = `${prenotazione.data} ${prenotazione.ora}`;
+            const prenotazioneEndFullDate = moment(prenotazioneFullDate, "DD/MM/YYYY HH:mm").add(prenotazione.durata, 'minutes').format("DD/MM/YYYY HH:mm");
+            
+            return moment(selectedFullDate, "DD/MM/YYYY HH:mm").isBetween(moment(prenotazioneFullDate, "DD/MM/YYYY HH:mm"), moment(prenotazioneEndFullDate, "DD/MM/YYYY HH:mm"));
+        });
     }
     
     // Imposta la data massima selezionabile a un mese a partire dalla data odierna
@@ -120,12 +162,12 @@ function Prenota() {
                     </div>
                 </div>
                 <div className="border">
-
+                {selectedService && (
                 <div className="relative overflow-x-auto shadow-md mt-5">
                     <h1 className="px-5 font-semibold">2. Seleziona l'orario che preferisci tra quelli disponibili</h1>
                     <div className="flex  mt-7">
                         <div className="flex ml-5">
-                            <div className="p-3 bg-gray-200"></div>
+                            <div className="p-3 bg-green-400"></div>
                             <span>&nbsp;Disponibile</span>
                         </div>
                         <div className="flex ml-7">
@@ -155,30 +197,37 @@ function Prenota() {
       const isDuringPausaPranzo = isPausaPranzo(ora);
 
       return (
-        <tr
-          key={ora}
-          className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 ${
+        <tr key={ora} className={`bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 ${
             isDuringPausaPranzo ? "cursor-not-allowed" : ""
-          }`}
-        >
-        {getDaysToShow().map((giorno) => (
-            <td key={giorno} className="px-5 py-3">
-                {isGiornoChiusura(giorno) || isDuringPausaPranzo ? (
-                    <span className="time-label-disabled cursor-not-allowed">{ora}</span>
-                ) : (
-                    <span className="time-label" onClick={() => handleTimeClick(ora, giorno)}>
-                        {ora}
+        }`}>
+        {getDaysToShow().map((giorno) => {
+            const formattedDate = moment(selectedDate).add(getDaysToShow().indexOf(giorno), "days").format("DD/MM/YYYY");
+            const isBooked = isTimeBooked(formattedDate, ora);
+            return (
+                <td key={giorno} className="px-5 py-3">
+                    <span 
+                    className={
+                        isGiornoChiusura(giorno) || isPausaPranzo(ora) ? "time-label-disabled cursor-not-allowed" : 
+                        isSlotDisponibile(ora, giorno) ? "time-label-available" : 
+                        "time-label-disabled cursor-not-allowed" 
+                    } 
+                    onClick={
+                        !isGiornoChiusura(giorno) && !isPausaPranzo(ora) && isSlotDisponibile(ora, giorno) ? () => handleTimeClick(ora, giorno) : 
+                        null
+                    }
+                    >
+                    {ora}
                     </span>
-                )}
-            </td>
-        ))}
+                </td>
+            );
+        })}
         </tr>
       );
     })}
   </tbody>
 </table>
                 </div>
-
+)}
                 </div>
                 <div className="border max-w-md p-3">
                     <h1 className="mt-2 font-semibold">3. Resoconto</h1>

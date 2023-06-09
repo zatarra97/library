@@ -7,8 +7,12 @@
 }
 
 .time-label {
-  @apply bg-gray-200 px-4 py-2 rounded-full hover:bg-blue-400 hover:text-white cursor-pointer;
+  @apply bg-gray-200 px-4 py-2 rounded-full hover:bg-blue-400 hover:text-white;
 }
 .time-label-disabled {
   @apply  px-4 py-2 rounded-full bg-red-400 text-white;
+}
+
+.time-label-available {
+  @apply  px-4 py-2 rounded-full bg-green-400 text-white cursor-pointer;
 }
