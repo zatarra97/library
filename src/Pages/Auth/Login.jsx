@@ -19,7 +19,6 @@ function Login(){
       event.preventDefault();
 
       try {
-        // Effettuiamo una chiamata POST all'endpoint 'http://localhost:3001/api/login' con il FormData come body
         const response = await Axios.post('http://localhost:3001/login', {username, password});
         console.log(response.data);
 
@@ -34,6 +33,12 @@ function Login(){
         console.error(error);
         alert('Si è verificato un errore durante l\'invio dei dati');
       }
+    };
+
+    const handleGoogleLogin = (event) => {
+        event.preventDefault();
+        console.log("Accesso con Google in corso...");
+        // Aggiungi qui la logica per gestire l'accesso con Google
     };
 
     return <>
@@ -63,11 +68,17 @@ function Login(){
                                 </div>
 
                                 <button type="submit" onClick={handleSubmit} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Accedi</button>
-
-                                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                    Non hai un account? <a href="/auth/registrati" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Registrati</a>
-                                </p>
+                            
                             </form>
+
+                            <button type="submit" onClick={handleGoogleLogin} className="w-full text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-500 dark:hover:bg-red-600 focus:outline-none dark:focus:ring-red-700">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google logo" className="inline-block w-4 h-4 mr-2"/> 
+                                    Accedi con Google
+                            </button>
+
+                            <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                                Non hai un account? <a href="/auth/registrati" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Registrati</a>
+                            </p>
                         </div>
                     </div>
                 </div>

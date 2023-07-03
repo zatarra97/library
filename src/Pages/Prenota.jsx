@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Cookies from 'js-cookie';
 import DatePicker from "react-datepicker";
 import axios from 'axios';
 import moment from "moment";
@@ -103,13 +104,46 @@ function Prenota() {
             return moment(selectedFullDate, "DD/MM/YYYY HH:mm").isBetween(moment(prenotazioneFullDate, "DD/MM/YYYY HH:mm"), moment(prenotazioneEndFullDate, "DD/MM/YYYY HH:mm"));
         });
     }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const email = Cookies.get('userEmail');
+        const date = moment(selectedDay, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss');
+
+        try {
+          // Effettuiamo una chiamata POST all'endpoint 'http://localhost:3001/api/login' con il FormData come body
+          const response = await axios.post('http://localhost:3001/bookService', {date, selectedService, email, selectedTime, selectedServiceDuration});
+          console.log(response.data);
+
+          if(response.data.code === 200){
+                console.log("redirect");
+                window.location.replace("/conferma-prenotazione");
+            }else{
+                console.log("no redirect");
+            }
+          
+        } catch (error) {
+          console.error(error);
+          alert('Si è verificato un errore durante l\'invio dei dati');
+        }
+      };
     
     // Imposta la data massima selezionabile a un mese a partire dalla data odierna
     const maxDate = new Date();
     maxDate.setMonth(maxDate.getMonth() + 1);
 
-    //Chiamo l'API per ricevere i servizi disponibili
+
     useEffect(() => {
+        //Controllo se l'utente è loggato
+        const userEmail = Cookies.get('userEmail');
+        const userName = Cookies.get('userName');
+        const userSurname = Cookies.get('userSurname');
+
+        if (!(userEmail && userName && userSurname)){
+            window.location.replace("/auth/login");
+        }
+
+        //Chiamo l'API per ricevere i servizi disponibili
         const fetchData = async () => {
           try {
             const response = await axios.get('http://localhost:3001/getServices');
@@ -235,6 +269,9 @@ function Prenota() {
                     <p>Orario: {selectedTime}</p>
                     <p>Servizio: {selectedService}</p>
                     <p>Durata s.: {selectedServiceDuration}</p>
+
+                    <button type="submit" onClick={handleSubmit} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Prenota</button>
+
                 </div>
             </div>
             
