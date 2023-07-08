@@ -1,55 +1,12 @@
-import logo from "../Image/logo_attivita.png"
+import logo from "../Image/logo.png";
 
 function Footer(){
     return <div className="text-white">
         <footer className="bg-slate-700 ">
             <div className="container px-3 py-6 xl:px-0 mx-auto  items-center">
-                <div className="md:flex md:justify-between">
-                    <div className="mb-6 md:mb-0">
-                        <a href="https://flowbite.com/" className="flex items-center">
-                            <img src={logo} className="mr-3 h-8" alt="FlowBite Logo" />
-                            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{process.env.REACT_APP_NAME}</span>
-                        </a>
-                    </div>
-                    <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-                        <div className="text-left text-white">
-                            <h2 className="mb-6 text-sm font-semibold uppercase ">Piattaforma</h2>
-                            <ul>
-                                <li className="mb-4">
-                                    <a href="/termini-e-condizioni" className="hover:underline">Termini e condizioni</a>
-                                </li>
-                                <li>
-                                    <a href="/privacy-policy" className="hover:underline">Privacy policy</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="text-left text-white">
-                            <h2 className="mb-6 text-sm font-semibold uppercase ">Follow us</h2>
-                            <ul>
-                                <li className="mb-4">
-                                    <a href="https://github.com/themesberg/flowbite" className="hover:underline ">Github</a>
-                                </li>
-                                <li>
-                                    <a href="https://discord.gg/4eeurUVvTy" className="hover:underline">Discord</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="text-left text-white">
-                            <h2 className="mb-6 text-sm font-semibold uppercase ">Follow us</h2>
-                            <ul>
-                                <li className="mb-4">
-                                    <a href="/" className="hover:underline">Privacy Policy</a>
-                                </li>
-                                <li>
-                                    <a href="/" className="hover:underline">Terms &amp; Conditions</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+
                 <div className="sm:flex sm:items-center sm:justify-between">
-                    <span className="text-sm  text-white sm:text-center">© 2022 <a href="/" className="hover:underline">{process.env.REACT_APP_NAME}™</a>. All Rights Reserved.
+                    <span className="text-sm  text-white sm:text-center">© 2023 <a href="/" className="hover:underline">{process.env.REACT_APP_NAME}™</a>. All Rights Reserved.
                     </span>
                     <div className="flex mt-4 space-x-6 sm:mt-0">
 
