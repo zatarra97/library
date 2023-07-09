@@ -277,12 +277,12 @@ const resetService = () => () => {
                 ))}
               </div>
               :
-                <div className="text-center justify-center py-32 md:pt-0 px-2 mt-10 md:mt-30" >
+                <div className="text-center justify-center py-32 md:pt-0 px-2 mt-10 md:mt-20" >
                   <div className="text-center justify-center mx-auto rounded-full overflow-hidden w-full md:w-80">
                     <img className="text-center justify-center w-60 md:w-80 mx-auto" src={imgNotFound} alt="not found" />
                   </div>
-                    
-                  <p className="text-2xl md:text-3xl md:pt-10 font-bold px-4">
+                  
+                  <p className="text-2xl md:text-3xl md:pt-10 text-center font-bold px-4">
                   Non ho trovato il libro che stavi cercando, prova a cambiare la tua ricerca.
                   </p>
                 </div>
@@ -296,7 +296,7 @@ const resetService = () => () => {
 {(!loading && filteredBooks.length !== 0) &&(
 <nav className="container mx-auto text-center py-20 px-4" aria-label="Page navigation example">
   <ul className="inline-flex flex-wrap items-center -space-x-px">
-    
+
     {/* Pulsante Pagina Precedente */}
     {currentPage > 1 && (
       <li>
