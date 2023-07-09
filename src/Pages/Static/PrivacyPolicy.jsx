@@ -7,7 +7,7 @@ function PrivacyPolicy(){
             <p className="mt-5">Gentile Cliente, <br />
 				MinervinoEat è il Titolare del trattamento dei dati da Lei forniti al momento della registrazione sul sito https://www.minervinoeat.it (il “Sito”), o comunque 
                 acquisiti in sede di prestazione dei servizi a cui Lei può accedere. È possibile inviare richieste o comunicazioni al Titolare all’indirizzo 
-                email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cfa2a6a1aabdb9a6a1a0aaaebb8fa8a2aea6a3e1aca0a2e1">[email&#160;protected]</a><br /><br />  
+                email <a href="/cdn-cgi/l/email-protection" className="__cf_email__" data-cfemail="cfa2a6a1aabdb9a6a1a0aaaebb8fa8a2aea6a3e1aca0a2e1">[email&#160;protected]</a><br /><br />  
 
 				L’accesso al Sito non richiede l’inserimento delle proprie generalità. Per l’eventuale fruizione del servizio di trasmissione di ordini on line attraverso 
                 il Sito e per avere accesso ad altri servizi aggiuntivi, dovrà inserire alcuni Suoi dati personali in apposite sezioni del Sito. <br /><br /> 
@@ -29,7 +29,7 @@ function PrivacyPolicy(){
                 
                 <li> - Il trattamento dei Suoi dati potrà inoltre avvenire: (a) per inviare al suo indirizzo email di registrazione informazioni ed offerte commerciali di servizi 
                 analoghi a quelli da lei acquistati in occasione dell’accesso al Sito, salvo che Lei si opponga a questo trattamento mediante invio di una mail all’indirizzo 
-                email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="97fafef9f2e5e1fef9f8f2f6e3d7f0faf6fefbb9f4f8fa">[email&#160;protected]</a> e, ove lei presti il suo consenso espresso, (b) per inviare al suo indirizzo email di registrazione informazioni ed offerte commerciali, 
+                email <a href="/cdn-cgi/l/email-protection" className="__cf_email__" data-cfemail="97fafef9f2e5e1fef9f8f2f6e3d7f0faf6fefbb9f4f8fa">[email&#160;protected]</a> e, ove lei presti il suo consenso espresso, (b) per inviare al suo indirizzo email di registrazione informazioni ed offerte commerciali, 
                 materiale pubblicitario e informativo, effettuare comunicazioni commerciali, anche interattive, compiere attività dirette di vendita o di collocamento di prodotti 
                 o servizi, anche di terzi.
 				</li>

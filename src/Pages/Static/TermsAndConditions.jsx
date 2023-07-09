@@ -150,7 +150,7 @@ function TermsAndConditions(){
             	<span className="font-bold">Disposizioni Generali</span>: MinervinoEat considera il servizio clienti estremamente importante. 
                 Il servizio clienti cerca di prestare assistenza all'Utente, anche per conto del Ristorante, quando possibile, in caso di problemi con l'ordine o con 
                 l'utilizzo del Sito. L'Utente può entrare in contatto con il servizio clienti cliccando su, o selezionando il, pulsante "Aiuto?", "Aiuto", "Assistenza" 
-                o altro pulsante simile o inviando una email al seguente indirizzo: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f89591969d8a8e9196979d998cd6998b8b918b8c9d968299b89f95999194d69b9795">[email&#160;protected]</a><br /><br />
+                o altro pulsante simile o inviando una email al seguente indirizzo: <a href="/cdn-cgi/l/email-protection" className="__cf_email__" data-cfemail="f89591969d8a8e9196979d998cd6998b8b918b8c9d968299b89f95999194d69b9795">[email&#160;protected]</a><br /><br />
                 
                 <span className="font-bold">Reclami e feedback da parte degli utenti</span>: Nell'eventualità che l'Utente non sia soddisfatto della qualità di un qualsiasi 
                 prodotto o del servizio fornito da un Ristorante, MinervinoEat invita l'Utente a far conoscere la propria opinione tramite il Sito, in forma di valutazioni, 

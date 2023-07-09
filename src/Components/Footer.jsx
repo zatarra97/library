@@ -1,12 +1,10 @@
-import logo from "../Image/logo.png";
-
 function Footer(){
     return <div className="text-white">
         <footer className="bg-slate-700 ">
             <div className="container px-3 py-6 xl:px-0 mx-auto  items-center">
 
                 <div className="sm:flex sm:items-center sm:justify-between">
-                    <span className="text-sm  text-white sm:text-center">© 2023 <a href="/" className="hover:underline">{process.env.REACT_APP_NAME}™</a>. All Rights Reserved.
+                    <span className="text-sm  text-white sm:text-center">© 2023 <a href="/" className="hover:underline">{process.env.REACT_APP_NAME}™</a>. All Rights Reserved. | Designed by Emmanuele Carlone
                     </span>
                     <div className="flex mt-4 space-x-6 sm:mt-0">
 
@@ -20,6 +18,11 @@ function Footer(){
                         </a>
 
                     </div>
+                </div>
+                <div className="md:hidden">
+                    <br />
+                    <br />
+                    <br />
                 </div>
             </div>
         </footer>

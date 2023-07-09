@@ -16,3 +16,19 @@
 .time-label-available {
   @apply  px-4 py-2 rounded-full bg-green-400 text-white cursor-pointer;
 }
+
+.logoText{
+  color: #032B36;
+  font-family: "Great Vibes", cursive;
+}
+
+.custom-background {
+ /* 
+  background-image: url('./Image/libreria.jpg');
+  background-repeat: no-repeat;
+  background-size: 100vw auto;
+  background-position: center;
+
+  background-attachment: fixed;
+  */
+}
