@@ -3,6 +3,7 @@ import axios from 'axios';
 import csv from 'csvtojson';
 import { BookCover } from 'book-cover-3d'
 import loadingImage from "../Image/book.gif"
+import imgNotFound from "../Image/not_found.png"
 
 const PAGE_SIZE = 25;
 
@@ -239,9 +240,9 @@ const resetService = () => () => {
                 </p>
               </div>
               
-            :
+            : ( <>
+              {filteredBooks.length !== 0 ? 
               <div className="flex flex-wrap mx-auto container pt-20 md:pt-5">
-
                 {booksForCurrentPage.map((book, index) => (
                   <div key={index} className={`w-6/12 md:w-1/3 lg:1/4 xl:w-1/5 p-4 mx-auto sm:mx-0 md:max-w-[420px]${windowWidth <= 420 ? 'max-w-[180px]' : 'max-w-[210px]'}`}>
                     <div className="flex justify-center mt-3 md:mt-10">
@@ -275,13 +276,27 @@ const resetService = () => () => {
                   </div>
                 ))}
               </div>
-            }
+              :
+                <div className="text-center justify-center py-32 md:pt-0 px-2 mt-10 md:mt-30" >
+                  <div className="text-center justify-center mx-auto rounded-full overflow-hidden w-full md:w-80">
+                    <img className="text-center justify-center w-60 md:w-80 mx-auto" src={imgNotFound} alt="not found" />
+                  </div>
+                    
+                  <p className="text-2xl md:text-3xl md:pt-10 font-bold px-4">
+                  Non ho trovato il libro che stavi cercando, prova a cambiare la tua ricerca.
+                  </p>
+                </div>
+              
+              }
+
+            </> )}
       
 
 {/*Paginazione */}
-{!loading &&(
+{(!loading && filteredBooks.length !== 0) &&(
 <nav className="container mx-auto text-center py-20 px-4" aria-label="Page navigation example">
   <ul className="inline-flex flex-wrap items-center -space-x-px">
+    
     {/* Pulsante Pagina Precedente */}
     {currentPage > 1 && (
       <li>
@@ -343,7 +358,7 @@ const resetService = () => () => {
     )}
 
     {/* Caso particolare */}
-    {(currentPage === 1 || currentPage === totalPages) && (
+    {((currentPage === 1 || currentPage === totalPages) && totalPages !== 1) && (
       <li>
         <button className='px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-md mx-0.5 mt-2' >
           ...
@@ -352,6 +367,7 @@ const resetService = () => () => {
     )}
 
     {/* Pulsante Ultima Pagina */}
+    {(totalPages !== 1) && (
     <li>
       <button
         className={`
@@ -364,6 +380,7 @@ const resetService = () => () => {
         {totalPages}
       </button>
     </li>
+    )}
 
     {/* Pulsante Pagina Successiva */}
     {currentPage < totalPages && (
