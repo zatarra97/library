@@ -27,15 +27,11 @@ const Books = () => {
 const handleServiceActive = (service) => () => {
   setServiceActive(!serviceActive);
   setService(service);
-  console.log("Cambio status servizio selezionato: " + serviceActive);
-  console.log("Servizio attivo: " + service);
 };
 
 const resetService = () => () => {
   setServiceActive(false);
   setService("");
-  console.log("Cambio status servizio selezionato: " + serviceActive);
-  console.log("Servizio resettato: " + service);
 };
 
 
@@ -46,7 +42,7 @@ const resetService = () => () => {
   useEffect(() => {
     setLoading(true); // Inizia il caricamento
     const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/1AM4tKpgKwUOdmUvx0pgGgNbiOU8wCskom1Voi98tagE/export?format=csv';
-
+    //const SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1ouQXWxwCBMG6LyEEVt59OBYRlL3qsK1ri42Puv8AqmY/export?format=csv"
     axios
       .get(SPREADSHEET_URL)
       .then(response => {
@@ -233,12 +229,12 @@ const resetService = () => () => {
 
           {/* Card libri */}
             {loading ?
-              <div className="text-center justify-center pt-32 md:pt-0 px-2" >
-                <div className="text-center justify-center border mx-auto rounded-full overflow-hidden w-full md:w-80">
-                  <img className="text-center justify-center w-80 mx-auto" src={loadingImage} alt="loading" />
+              <div className="text-center justify-center pt-32 md:pt-0 px-2 h-screen mt-10 md:mt-30" >
+                <div className="text-center justify-center mx-auto rounded-full overflow-hidden w-full md:w-80">
+                  <img className="text-center justify-center w-60 md:w-80 mx-auto" src={loadingImage} alt="loading" />
                 </div>
                   
-                <p className="text-2xl md:text-3xl mt-5 font-bold px-4">
+                <p className="text-2xl md:text-3xl pt-10 font-bold px-4">
                   Caricamento libri in corso...
                 </p>
               </div>
@@ -282,37 +278,119 @@ const resetService = () => () => {
             }
       
 
+{/*Paginazione */}
+{!loading &&(
+<nav className="container mx-auto text-center py-20 px-4" aria-label="Page navigation example">
+  <ul className="inline-flex flex-wrap items-center -space-x-px">
+    {/* Pulsante Pagina Precedente */}
+    {currentPage > 1 && (
+      <li>
+        <button
+          className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 mr-0.5 mt-2"
+          onClick={() => goToPage(currentPage - 1)}
+        >
+          <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd"></path>
+          </svg>
+        </button>
+      </li>
+    )}
 
-        {/*Paginazione */}
-        <nav className="container mx-auto text-center py-20 px-4" aria-label="Page navigation example">
-          <ul className="inline-flex flex-wrap items-center -space-x-px">
-            <li>
-              <button className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 mr-0.5 mt-2" onClick={() => goToPage(currentPage - 1)}>
-                <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
-              </button>
-            </li>
-            {pageNumbers.map(page => (
-              <li key={page} >
-                <button 
-                  className={`
-                    px-3 py-2 leading-tight 
-                    ${page === currentPage ? 'text-[#032B36] bg-blue-50 border border-[#032B36]' : 'text-gray-500 bg-white border border-gray-300'} 
-                    hover:bg-gray-100 hover:text-gray-700 rounded-md mx-0.5 mt-2
-                  `} 
-                  onClick={() => goToPage(page)}
-                >
-                  {page}
-                </button>
-              </li>
-            ))}
-            <li>
-              <button className="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 ml-0.5 mt-2" onClick={() => goToPage(currentPage + 1)}>
-                <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
-              </button>
-            </li>
-          </ul>
-        </nav>
+    {/* Pulsante Pagina 1 */}
+    <li>
+      <button
+        className={`
+          px-3 py-2 leading-tight 
+          ${currentPage === 1 ? 'text-[#032B36] bg-blue-50 border border-[#032B36]' : 'text-gray-500 bg-white border border-gray-300'} 
+          hover:bg-gray-100 hover:text-gray-700 rounded-md mx-0.5 mt-2
+        `}
+        onClick={() => goToPage(1)}
+      >
+        1
+      </button>
+    </li>
 
+    {/* Pulsante Pagina Corrente */}
+    {currentPage !== 1 && currentPage !== totalPages && (
+      <>
+        {currentPage !== 2 && (
+          <li>
+            <button className='px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-md mx-0.5 mt-2' >
+              ...
+            </button>
+          </li>
+        )}
+        <li>
+          <button
+            className={`
+              px-3 py-2 leading-tight 
+              ${currentPage === currentPage ? 'text-[#032B36] bg-blue-50 border border-[#032B36]' : 'text-gray-500 bg-white border border-gray-300'} 
+              hover:bg-gray-100 hover:text-gray-700 rounded-md mx-0.5 mt-2
+            `}
+            onClick={() => goToPage(currentPage)}
+          >
+            {currentPage}
+          </button>
+        </li>
+        {currentPage !== totalPages -1 && (
+          <li>
+            <button className='px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-md mx-0.5 mt-2' >
+              ...
+            </button>
+          </li>
+        )}
+      </>
+    )}
+
+    {/* Caso particolare */}
+    {(currentPage === 1 || currentPage === totalPages) && (
+      <li>
+        <button className='px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-md mx-0.5 mt-2' >
+          ...
+        </button>
+      </li>
+    )}
+
+    {/* Pulsante Ultima Pagina */}
+    <li>
+      <button
+        className={`
+          px-3 py-2 leading-tight 
+          ${currentPage === totalPages ? 'text-[#032B36] bg-blue-50 border border-[#032B36]' : 'text-gray-500 bg-white border border-gray-300'} 
+          hover:bg-gray-100 hover:text-gray-700 rounded-md mx-0.5 mt-2
+        `}
+        onClick={() => goToPage(totalPages)}
+      >
+        {totalPages}
+      </button>
+    </li>
+
+    {/* Pulsante Pagina Successiva */}
+    {currentPage < totalPages && (
+      <li>
+        <button
+          className="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 ml-0.5 mt-2"
+          onClick={() => goToPage(currentPage + 1)}
+        >
+          <svg
+            aria-hidden="true"
+            className="w-5 h-5"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fillRule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clipRule="evenodd"
+            ></path>
+          </svg>
+        </button>
+      </li>
+    )}
+  </ul>
+</nav>
+)}
 
   {/* Navbar Smartphone */}
   <div className="md:hidden fixed z-50 w-full h-14 max-w-md -translate-x-1/2 bg-white border-2 border-[#032B36] rounded-full bottom-4 left-1/2 shadow">

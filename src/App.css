@@ -31,4 +31,9 @@
 
   background-attachment: fixed;
   */
+  background-image: url('./Image/bg-opacity-25.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }
