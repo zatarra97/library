@@ -237,6 +237,16 @@ const resetService = () => () => {
                   "titoli"
                 }
             </button>
+
+            {/*Numero elementi per pagina */}
+            <label for="underline_select" class="sr-only">Underline select</label>
+            <select id="underline_select" class="font-bold block py-2.5 px-0 text-sm bg-transparent border-0 border-b-2 border-[#032B36] appearance-none focus:outline-none focus:ring-0 focus:border-[#032B36] peer ml-5"
+              value={pageSize || ''}
+              onChange={handleSettingChange}>
+                <option value="25">25 libri per pagina</option>
+                <option value="50">50 libri per pagina</option>
+                <option value="75">75 libri per pagina</option>
+            </select>
           </div>
 
 
