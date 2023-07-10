@@ -15,6 +15,7 @@ const Books = () => {
   const [searchTerm, setSearchTerm] = useState('');         //Stato della ricerca
   const [loading, setLoading] = useState(false);            // Stato per il caricamento
   const [selectedGenre, setSelectedGenre] = useState(null); // Stato per il genere selezionato
+  const [selectedSetting, setSelectedSetting] = useState(25); // Stato per il setting selezionato
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   //Stati navbar Smartphone
@@ -103,6 +104,18 @@ const resetService = () => () => {
         behavior: 'smooth' // Opzionale: anima lo scorrimento
       });
     };
+
+        // Gestore del numero di elementi per pagina
+        const handleSettingChange = (event) => {
+          setSelectedSetting(event.target.value);
+          console.log("Devo mettere " + event.target.value + " per pagina");
+          setCurrentPage(1);  //Torna alla prima pagina
+    
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Opzionale: anima lo scorrimento
+          });
+        };
 
     // Ottieni un array unico di generi
     const genres = [...new Set(books.map(book => book.GENERE))];
@@ -412,7 +425,7 @@ const resetService = () => () => {
   {/* Navbar Smartphone */}
   <div className="md:hidden fixed z-50 w-full h-14 max-w-md -translate-x-1/2 bg-white border-2 border-[#032B36] rounded-full bottom-4 left-1/2 shadow">
     {!serviceActive ? 
-      <div className="grid h-full max-w-lg grid-cols-3 mx-auto">
+      <div className="grid h-full max-w-lg grid-cols-4 mx-auto">
 
           <div className="flex items-center justify-center">
             <button data-tooltip-target="tooltip-home" type="button" className="inline-flex items-center justify-center w-10  h-10 bg-[#032B36] rounded-full text-white" onClick={handleServiceActive("order")}>
@@ -437,6 +450,15 @@ const resetService = () => () => {
                     <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path>
                 </svg>
                 <span className="sr-only">Filtri</span>
+            </button>
+          </div>
+
+          <div className="flex items-center justify-center">
+            <button data-tooltip-target="tooltip-home" type="button" className="inline-flex items-center justify-center w-10  h-10 bg-[#032B36] rounded-full text-white" onClick={handleServiceActive("setting")}>
+              <svg className="w-6 h-6  text-white" viewBox="0 0 1920 1920" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1703.534 960c0-41.788-3.84-84.48-11.633-127.172l210.184-182.174-199.454-340.856-265.186 88.433c-66.974-55.567-143.323-99.389-223.85-128.415L1158.932 0h-397.78L706.49 269.704c-81.43 29.138-156.423 72.282-223.962 128.414l-265.073-88.32L18 650.654l210.184 182.174C220.39 875.52 216.55 918.212 216.55 960s3.84 84.48 11.633 127.172L18 1269.346l199.454 340.856 265.186-88.433c66.974 55.567 143.322 99.389 223.85 128.415L761.152 1920h397.779l54.663-269.704c81.318-29.138 156.424-72.282 223.963-128.414l265.073 88.433 199.454-340.856-210.184-182.174c7.793-42.805 11.633-85.497 11.633-127.285m-743.492 395.294c-217.976 0-395.294-177.318-395.294-395.294 0-217.976 177.318-395.294 395.294-395.294 217.977 0 395.294 177.318 395.294 395.294 0 217.976-177.317 395.294-395.294 395.294" fill-rule="evenodd"/>
+              </svg>
+                <span className="sr-only">Impostazioni</span>
             </button>
           </div>
 
@@ -492,6 +514,35 @@ const resetService = () => () => {
           </button>
         </div>
         :
+                /*Sezione settings */
+                service === "setting" ?
+                <div className="flex w-full h-56">
+                  <button data-tooltip-target="tooltip-new" type="button" className="inline-flex items-center justify-center h-10 font-medium bg-gray-400 hover:bg-gray-500 rounded-full mt-1.5 mx-2 min-w-[40px] text-white" onClick={resetService()}>
+                    <svg className="w-6 h-6 text-white rotate-90" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </button>
+        
+                  <div className="relative mt-2 w-full">
+                  <select 
+                        className="block w-full pt-2.5 px-4 pl-5 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                        value={selectedSetting || ''}
+                        onChange={handleSettingChange}
+                      >
+                        <option value="25">25 libri per pagina</option>
+                        <option value="50">50 libri per pagina</option>
+                        <option value="75">75 libri per pagina</option>
+
+                  </select>
+                  </div>
+        
+                  <button data-tooltip-target="tooltip-new" type="button" className="inline-flex items-center justify-center h-10 font-medium bg-[#032B36] rounded-full mt-1.5 mx-2 min-w-[40px]">
+                    <svg className="w-6 h-6  text-white" viewBox="0 0 1920 1920" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1703.534 960c0-41.788-3.84-84.48-11.633-127.172l210.184-182.174-199.454-340.856-265.186 88.433c-66.974-55.567-143.323-99.389-223.85-128.415L1158.932 0h-397.78L706.49 269.704c-81.43 29.138-156.423 72.282-223.962 128.414l-265.073-88.32L18 650.654l210.184 182.174C220.39 875.52 216.55 918.212 216.55 960s3.84 84.48 11.633 127.172L18 1269.346l199.454 340.856 265.186-88.433c66.974 55.567 143.322 99.389 223.85 128.415L761.152 1920h397.779l54.663-269.704c81.318-29.138 156.424-72.282 223.963-128.414l265.073 88.433 199.454-340.856-210.184-182.174c7.793-42.805 11.633-85.497 11.633-127.285m-743.492 395.294c-217.976 0-395.294-177.318-395.294-395.294 0-217.976 177.318-395.294 395.294-395.294 217.977 0 395.294 177.318 395.294 395.294 0 217.976-177.317 395.294-395.294 395.294" fill-rule="evenodd"/>
+                    </svg>
+                  </button>
+                </div>
+                :
         <div className="flex w-full h-56">
           <button data-tooltip-target="tooltip-new" type="button" className="inline-flex items-center justify-center h-10 font-medium bg-gray-400 hover:bg-gray-500 rounded-full mt-1.5 mx-2 min-w-[40px] text-white" onClick={resetService()}>
             <svg className="w-6 h-6 text-white rotate-90" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
