@@ -7,6 +7,7 @@ import Footer from "./Components/Footer";
 
 import NotFound from "./Pages/NotFound";
 import Books from "./Pages/Books";
+import NewBook from "./Pages/NewBook";
 
 
 
@@ -17,6 +18,7 @@ function App() {
   <Navbar />
   <Routes>
     <Route path="/" element={<Books />} />
+    <Route path="/nuovo-libro" element={<NewBook />} />
 
     <Route path="/*" element={<NotFound />}/>
   </Routes>

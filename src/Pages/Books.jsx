@@ -42,8 +42,8 @@ const resetService = () => () => {
   --------------------------------------------------------------*/
   useEffect(() => {
     setLoading(true); // Inizia il caricamento
-    const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/1AM4tKpgKwUOdmUvx0pgGgNbiOU8wCskom1Voi98tagE/export?format=csv';
-    //const SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1ouQXWxwCBMG6LyEEVt59OBYRlL3qsK1ri42Puv8AqmY/export?format=csv"
+    //const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/1AM4tKpgKwUOdmUvx0pgGgNbiOU8wCskom1Voi98tagE/export?format=csv';
+    const SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1ouQXWxwCBMG6LyEEVt59OBYRlL3qsK1ri42Puv8AqmY/export?format=csv"
     axios
       .get(SPREADSHEET_URL)
       .then(response => {
@@ -240,7 +240,7 @@ const resetService = () => () => {
 
             {/*Numero elementi per pagina */}
             <label for="underline_select" class="sr-only">Underline select</label>
-            <select id="underline_select" class="font-bold block py-2.5 px-0 text-sm bg-transparent border-0 border-b-2 border-[#032B36] appearance-none focus:outline-none focus:ring-0 focus:border-[#032B36] peer ml-5"
+            <select id="underline_select" class="font-bold block px-0 pt-2 text-sm bg-transparent border-0 border-b-2 border-[#032B36] appearance-none focus:outline-none focus:ring-0 focus:border-[#032B36] peer ml-5 cursor-pointer"
               value={pageSize || ''}
               onChange={handleSettingChange}>
                 <option value="25">25 libri per pagina</option>
