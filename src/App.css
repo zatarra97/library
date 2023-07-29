@@ -1,0 +1,39 @@
+.cta {
+  @apply focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 uppercase;
+}
+
+.primary {
+  @apply text-white bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800;
+}
+
+.time-label {
+  @apply bg-gray-200 px-4 py-2 rounded-full hover:bg-blue-400 hover:text-white;
+}
+.time-label-disabled {
+  @apply  px-4 py-2 rounded-full bg-red-400 text-white;
+}
+
+.time-label-available {
+  @apply  px-4 py-2 rounded-full bg-green-400 text-white cursor-pointer;
+}
+
+.logoText{
+  color: #032B36;
+  font-family: "Great Vibes", cursive;
+}
+
+.custom-background {
+ /* 
+  background-image: url('./Image/libreria.jpg');
+  background-repeat: no-repeat;
+  background-size: 100vw auto;
+  background-position: center;
+
+  background-attachment: fixed;
+  */
+  background-image: url('./Image/bg-opacity-25.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
